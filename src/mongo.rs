@@ -1,0 +1,47 @@
+use std::process::Command;
+use std::{error, fmt};
+use config::Config;
+use dump::DumpResult;
+
+const MONGO_DUMP_COMMAND: &str = "mongodump";
+
+#[derive(Debug)]
+pub enum MongoError {
+    HostNotDefined,
+}
+pub type MongoDumpResult = Result<DumpResult,MongoError>;
+
+impl fmt::Display for MongoError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            MongoError::HostNotDefined => write!(f, "host is not defined"),
+        }
+    }
+}
+
+impl error::Error for MongoError {
+    fn description(&self) -> &str {
+         match *self {
+            MongoError::HostNotDefined => "host is not defined",
+        }
+    }
+
+    fn cause(&self) -> Option<&error::Error> {
+        None
+    }
+}
+
+// mysql_dump provides dumping of mysql db
+pub fn mongo_dump(conf:Config) -> MongoDumpResult {
+    if conf.host == "" {
+        return Err(MongoError::HostNotDefined)
+    }
+
+    let mut output = Command::new(MONGO_DUMP_COMMAND);
+    if conf.gZip != "" {
+        output.arg("--gzip");
+    }
+    output.arg("--archive=.").output();
+    let dr = DumpResult{name:"archive.gz".to_string()};
+    Ok(dr)
+}

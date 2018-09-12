@@ -1,0 +1,6 @@
+[package]
+name = "backuppp"
+version = "0.1.0"
+authors = ["Sergey <xxsmotur@gmail.com>"]
+
+[dependencies]
