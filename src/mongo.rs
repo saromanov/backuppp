@@ -41,7 +41,9 @@ pub fn mongo_dump(conf:Config) -> MongoDumpResult {
     if conf.gZip != "" {
         output.arg("--gzip");
     }
-    output.arg("--archive=.").output();
+    output.arg("--archive=.")
+    .output()
+    .expect("unable to execute command");
     let dr = DumpResult{name:"archive.gz".to_string()};
     Ok(dr)
 }
