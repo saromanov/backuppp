@@ -15,7 +15,7 @@ fn main() {
     };
    match mongo::mongo_dump(conf) {
        Ok(dr) => {
-           println!("{:}?", dr.name)
+           println!("Created archive file: {:}", dr.name)
        }
        Err(why) => {
            println!("{:}?", why)
