@@ -38,7 +38,7 @@ pub fn mongo_dump(conf:Config) -> MongoDumpResult {
     }
 
     let mut output = Command::new(MONGO_DUMP_COMMAND);
-    if conf.gZip != "" {
+    if conf.g_zip != "" {
         output.arg("--gzip");
     }
     output.arg("--archive=.")

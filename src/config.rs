@@ -3,5 +3,5 @@ pub struct Config {
    pub database:String,
    pub host:String,
    pub username:String,
-   pub gZip:String,
+   pub g_zip:String,
 }

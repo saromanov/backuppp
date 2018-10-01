@@ -11,7 +11,7 @@ fn main() {
         database:"".to_string(),
         host:"localhost".to_string(),
         username:"".to_string(),
-        gZip:"true".to_string(),
+        g_zip:"true".to_string(),
     };
    match mongo::mongo_dump(conf) {
        Ok(dr) => {

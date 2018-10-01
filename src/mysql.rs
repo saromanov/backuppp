@@ -33,7 +33,7 @@ impl error::Error for MySQLError {
 }
 
 // mysql_dump provides dumping of mysql db
-pub fn mysql_dump(conf:Config) -> Result<process::Output,io::Error> {
+pub fn mysql_dump(_conf:Config) -> Result<process::Output,io::Error> {
     Command::new(DUMP_COMMAND)
             .arg("-c")
             .arg("echo hello")
