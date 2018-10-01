@@ -7,16 +7,15 @@ mod dump;
 use config::Config;
 
 fn main() {
-    println!("Hello, world!");
     let conf = Config{
-        database:"AAA".to_string(),
-        host:"AAA".to_string(),
-        username:"AAA".to_string(),
-        gZip:"AAA".to_string(),
+        database:"".to_string(),
+        host:"localhost".to_string(),
+        username:"".to_string(),
+        gZip:"true".to_string(),
     };
    match mongo::mongo_dump(conf) {
        Ok(dr) => {
-
+           println!("{:}?", dr.name)
        }
        Err(why) => {
            println!("{:}?", why)
