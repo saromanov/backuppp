@@ -4,4 +4,5 @@ pub struct Config {
    pub host:String,
    pub username:String,
    pub g_zip:String,
+   pub backup_storage:String,
 }
