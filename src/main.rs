@@ -3,6 +3,7 @@ mod mysql;
 mod mongo;
 mod config;
 mod dump;
+mod upload;
 
 use config::Config;
 
