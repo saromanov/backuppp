@@ -1,7 +1,5 @@
 use std::process::Command;
-use std::process;
 use std::{error, fmt};
-use std::io;
 use config::Config;
 use dump::DumpResult;
 
@@ -38,8 +36,6 @@ impl error::Error for MySQLError {
 // mysql_dump provides dumping of mysql db
 pub fn mysql_dump(_conf:Config) -> MySQLDumpResult {
     Command::new(DUMP_COMMAND)
-            .arg("-c")
-            .arg("echo hello")
             .output();
     let dr = DumpResult{name:"archive.gz".to_string()};
     Ok(dr)

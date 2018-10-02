@@ -5,4 +5,5 @@ pub struct Config {
    pub username:String,
    pub g_zip:String,
    pub backup_storage:String,
+   pub backup_upload:String,
 }
