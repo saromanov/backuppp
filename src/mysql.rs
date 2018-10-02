@@ -3,9 +3,12 @@ use std::process;
 use std::{error, fmt};
 use std::io;
 use config::Config;
+use dump::DumpResult;
 
 const DUMP_COMMAND:&str = "mysqldump";
 const DEFAULT_MYSQL_PORT:u32 = 3306;
+
+pub type MySQLDumpResult = Result<DumpResult,MySQLError>;
 
 #[derive(Debug, Clone)]
 pub enum MySQLError {
@@ -33,11 +36,11 @@ impl error::Error for MySQLError {
 }
 
 // mysql_dump provides dumping of mysql db
-pub fn mysql_dump(_conf:Config) -> MongoDumpResult {
+pub fn mysql_dump(_conf:Config) -> MySQLDumpResult {
     Command::new(DUMP_COMMAND)
             .arg("-c")
             .arg("echo hello")
-            .output()
+            .output();
     let dr = DumpResult{name:"archive.gz".to_string()};
     Ok(dr)
 }
