@@ -2,6 +2,7 @@ use std::process::Command;
 use std::{error, fmt};
 use config::Config;
 use dump::DumpResult;
+use storage::Storage;
 
 const MONGO_DUMP_COMMAND: &str = "mongodump";
 
@@ -28,6 +29,16 @@ impl error::Error for MongoError {
 
     fn cause(&self) -> Option<&error::Error> {
         None
+    }
+}
+
+pub struct MongoDump {
+    host:String,
+}
+
+impl Storage for MongoDump {
+    fn build(&mut self, conf:Config){
+        self.host = conf.host;
     }
 }
 
