@@ -17,6 +17,17 @@ fn backup_mongo(conf:Config){
        }
    }
 }
+
+fn backup_mysql(conf:Config) {
+    match mysql::mysql_dump(conf) {
+       Ok(dr) => {
+           println!("Created archive file: {:}", dr.name)
+       }
+       Err(why) => {
+           println!("{:}?", why)
+       }
+    }
+}
 fn main() {
     let conf = Config{
         database:"".to_string(),
@@ -29,6 +40,9 @@ fn main() {
     match &conf.backup_storage.as_ref() {
         &"mongo" => {
             backup_mongo(conf);
+        }
+        &"mysql" => {
+            backup_mysql(conf);
         }
         _ => {
             println!("unable to find backup storage")

@@ -33,9 +33,11 @@ impl error::Error for MySQLError {
 }
 
 // mysql_dump provides dumping of mysql db
-pub fn mysql_dump(_conf:Config) -> Result<process::Output,io::Error> {
+pub fn mysql_dump(_conf:Config) -> MongoDumpResult {
     Command::new(DUMP_COMMAND)
             .arg("-c")
             .arg("echo hello")
             .output()
+    let dr = DumpResult{name:"archive.gz".to_string()};
+    Ok(dr)
 }
