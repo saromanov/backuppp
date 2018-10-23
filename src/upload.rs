@@ -1,5 +1,6 @@
 use s3::bucket::Bucket;
 use s3::credentials::Credentials;
+use config::Config;
 
 use std::process::Command;
 const GCE_UPLOAD_COMMAND: &str = "gsutil";
@@ -21,13 +22,11 @@ pub fn upload_to_aws(bucket:String, name:String){
 //
 // upload_to_ftp provides upload
 // of backup file to ftp
-pub fn upload_to_ftp(bucket:String, name:String) {
-    let mut ftp_stream = FtpStream::connect("127.0.0.1:21").unwrap();
-    let _ = ftp_stream.login("username", "password").unwrap();
+pub fn upload_to_ftp(conf:Config, bucket:String, name:String) {
+    let mut ftp_stream = FtpStream::connect(conf.ftp_address).unwrap();
+    let _ = ftp_stream.login(conf.ftp_login, conf.ftp_password).unwrap();
     println!("Current directory: {}", ftp_stream.pwd().unwrap());
-    let _ = ftp_stream.cwd("test_data").unwrap();
-    let remote_file = ftp_stream.simple_retr("ftpext-charter.txt").unwrap();
-    println!("Read file with contents\n{}\n", str::from_utf8(&remote_file.into_inner()).unwrap());
+    let _ = ftp_stream.cwd("backup").unwrap();
     let mut reader = Cursor::new("Hello from the Rust \"ftp\" crate!".as_bytes());
     let _ = ftp_stream.put("greeting.txt", &mut reader);
     println!("Successfully wrote greeting.txt");
