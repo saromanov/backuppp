@@ -37,6 +37,8 @@ fn main() {
         g_zip:"true".to_string(),
         backup_storage:"mongo".to_string(),
         backup_upload:"gce".to_string(),
+        ftp_login:"".to_string(),
+        ftp_password:"".to_string(),
     };
 
     match &conf.backup_storage.as_ref() {
