@@ -8,4 +8,5 @@ pub struct Config {
    pub backup_upload:String,
    pub ftp_login:String,
    pub ftp_password:String,
+   pub ftp_address:String,
 }
